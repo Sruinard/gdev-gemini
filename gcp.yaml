@@ -1,0 +1,8 @@
+name: gemini-app
+project_id: gdev-cli-test-project
+region: us-central1
+services:
+    gems_app:
+        project: ./src/gems
+        language: python
+        host: cloudrun

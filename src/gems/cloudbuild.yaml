@@ -1,0 +1,21 @@
+
+steps:
+  - name: python:3.9
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        pip install --upgrade pip
+        pip install poetry
+        poetry install
+        poetry run pytest
+        poetry export --without-hashes --output requirements.txt
+  - name: 'gcr.io/cloud-builders/gcloud'
+    script: |
+      service_name=$(gcloud run services list --filter="spec.template.metadata.labels.gdev_services=${_GDEV_SERVICE_NAME}" --format="value(metadata.name)")
+      gcloud run deploy $service_name --source . --region us-central1 --platform managed --allow-unauthenticated
+  
+options:
+  automapSubstitutions: true
+substitutions:
+  _GDEV_SERVICE_NAME: ""
