@@ -1,6 +1,6 @@
 name: gemini-app
-project_id: gdev-cli-test-project
-region: us-central1
+project_id: ""
+region: ""
 services:
     gems_app:
         project: ./src/gems
