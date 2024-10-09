@@ -15,7 +15,7 @@ async def root():
     return {"message": "Hello World"}
 
 @app.post("/messages")
-async def invoke(message: ChatMessage):
+async def invoke(message: ChatMessage) -> str:
     pid = ""
     if 'GCP_PROJECT' in os.environ:
         pid = os.environ['GCP_PROJECT']
